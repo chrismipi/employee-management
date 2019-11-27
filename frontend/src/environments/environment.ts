@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   backend: {
-    url: "http://157.245.164.173:8000/api",
+    url: "http://localhost:8000/api",
     endpoints: {
       people: "/people/",
       employees: "/employees/"
