@@ -1,0 +1,52 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<form [formGroup]="form" novalidate>
+  <div mat-dialog-content>
+    <div class="form-container">
+      <mat-form-field>
+        <input matInput placeholder="Employee N0." [disabled]=true readonly=true formControlName="employee_number"
+          [value]="data.body.employee_number">
+      </mat-form-field>
+
+      <mat-form-field *ngIf="data.body.employed_date">
+        <input matInput placeholder="Employed date" [disabled]=true readonly=true formControlName="employed_date"
+          [value]="data.body.employed_date">
+      </mat-form-field>
+
+      <mat-form-field *ngIf="data.body.terminated_date">
+        <input matInput placeholder="Terminated date" [disabled]=true readonly=true formControlName="terminated_date"
+          [value]="data.body.terminated_date">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="First Name" readonly="{{data.view}}" formControlName="first_name"
+          [ngModel]="data.body.first_name">
+        <mat-hint align="end">Not more then 100 characters long.</mat-hint>
+        <mat-error *ngIf="form.get('first_name').touched && form.get('first_name').invalid">First name is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="Last Name" readonly="{{data.view}}" formControlName="last_name"
+          [ngModel]="data.body.last_name">
+        <mat-hint align="end">Not more then 100 characters long.</mat-hint>
+        <mat-error *ngIf="form.get('last_name').touched && form.get('last_name').invalid">Last name is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [min]="minDate" [max]="maxDate" [disabled]=data.view [matDatepicker]="picker"
+          placeholder="Birth date" [ngModel]="data.body.birth_date" readonly=true formControlName="birth_date">
+        <mat-hint align="end">Cannot be future date</mat-hint>
+        <mat-error *ngIf="form.get('birth_date').touched && form.get('birth_date').invalid">Birth date is required
+        </mat-error>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker [disabled]=data.view></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+  <mat-dialog-actions align="center">
+    <button mat-raised-button color="primary" *ngIf="data.view" (click)="onNoClick()" cdkFocusInitial>OK</button>
+    <button mat-raised-button *ngIf="!data.view" (click)="onNoClick()" cdkFocusInitial>Cancel</button>
+    <button mat-raised-button color="primary" *ngIf="!data.view" (click)="onSubmit(data)" [disabled]="!form.valid">Submit</button>
+  </mat-dialog-actions>
+</form>

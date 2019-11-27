@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  <div class="container">
+    <p>
+      This action is not reversable
+    </p>
+  </div>
+</div>
+<mat-dialog-actions align="center">
+  <button mat-raised-button (click)="onNoClick()" cdkFocusInitial>Cancel</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="data">Confirm</button>
+</mat-dialog-actions>
